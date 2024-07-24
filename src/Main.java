@@ -1,28 +1,40 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println("== 프로그램 시작 ==");
+		
 		int id = 0;
+		
+		ArrayList<Article> articles = new ArrayList<>();
+
 		while (true) {
 
 			System.out.printf("명령어 ) ");
-			String cmd = sc.nextLine();
+			String cmd = sc.nextLine().trim();
 
 			if (cmd.length() == 0) {
 				System.out.println("명령어를 입력해주세요.");
+				continue;
+			}
 
-			} else if (cmd.equals("article write")) {
+			if (cmd.equals("article write")) {
 
 				System.out.printf("제목 : ");
-				cmd = sc.nextLine();
+				String title = sc.nextLine();
 
 				System.out.printf("내용 : ");
-				cmd = sc.nextLine();
+				String body = sc.nextLine();
 
 				id++;
+
+				Article article = new Article(title, body, id);
+
+				articles.add(article);
 
 				System.out.printf("%d번 글이 생성되었습니다.\n", id);
 
@@ -38,11 +50,25 @@ class Main {
 
 			if (cmd.equals("exit")) {
 
-				System.out.println("== 프로그램 끝 ==");
 				break;
 			}
 
 		}
+
 		sc.close();
+
+		System.out.println("== 프로그램 끝 ==");
+	}
+}
+
+class Article {
+	String title;
+	String body;
+	int id;
+
+	public Article(String title, String body, int id) {
+		this.title = title;
+		this.body = body;
+		this.id = id;
 	}
 }
